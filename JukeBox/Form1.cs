@@ -26,5 +26,12 @@ namespace JukeBox
         {
 
         }
+
+        private void setupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetupForm SetupForm = new SetupForm();
+            SetupForm.Show();
+
+        }
     }
 }
