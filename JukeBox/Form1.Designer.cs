@@ -148,6 +148,7 @@
             this.MaximumSize = new System.Drawing.Size(700, 700);
             this.Name = "JukeBoxForm";
             this.Text = "JukeBox";
+            this.Load += new System.EventHandler(this.JukeBoxForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WinMedPlayer)).EndInit();
