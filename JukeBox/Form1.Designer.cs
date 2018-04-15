@@ -57,6 +57,7 @@
             // 
             this.GenreTitleTxtBox.Location = new System.Drawing.Point(242, 99);
             this.GenreTitleTxtBox.Name = "GenreTitleTxtBox";
+            this.GenreTitleTxtBox.ReadOnly = true;
             this.GenreTitleTxtBox.Size = new System.Drawing.Size(176, 22);
             this.GenreTitleTxtBox.TabIndex = 1;
             // 
@@ -64,11 +65,6 @@
             // 
             this.GenreListBox.FormattingEnabled = true;
             this.GenreListBox.ItemHeight = 16;
-            this.GenreListBox.Items.AddRange(new object[] {
-            "cant stop",
-            "dancing in the moonlight",
-            "the pretender",
-            "pour it up"});
             this.GenreListBox.Location = new System.Drawing.Point(242, 127);
             this.GenreListBox.Name = "GenreListBox";
             this.GenreListBox.Size = new System.Drawing.Size(176, 84);
@@ -78,9 +74,11 @@
             // GenreSelecHScroll
             // 
             this.GenreSelecHScroll.Location = new System.Drawing.Point(242, 214);
+            this.GenreSelecHScroll.Maximum = 50;
             this.GenreSelecHScroll.Name = "GenreSelecHScroll";
             this.GenreSelecHScroll.Size = new System.Drawing.Size(176, 22);
             this.GenreSelecHScroll.TabIndex = 3;
+            this.GenreSelecHScroll.ValueChanged += new System.EventHandler(this.GenreSelecHScroll_ValueChanged);
             // 
             // PresentlyPlayTxtBox
             // 
