@@ -33,5 +33,10 @@ namespace JukeBox
             SetupForm.Show();
 
         }
+
+        private void GenreListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+        }
     }
 }

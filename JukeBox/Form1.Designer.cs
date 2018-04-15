@@ -67,6 +67,7 @@
             this.GenreListBox.Name = "GenreListBox";
             this.GenreListBox.Size = new System.Drawing.Size(176, 84);
             this.GenreListBox.TabIndex = 2;
+            this.GenreListBox.SelectedIndexChanged += new System.EventHandler(this.GenreListBox_SelectedIndexChanged);
             // 
             // GenreSelecHScroll
             // 
