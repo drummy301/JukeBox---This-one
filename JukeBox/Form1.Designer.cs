@@ -63,11 +63,15 @@
             // 
             this.GenreListBox.FormattingEnabled = true;
             this.GenreListBox.ItemHeight = 16;
+            this.GenreListBox.Items.AddRange(new object[] {
+            "test1",
+            "test2"});
             this.GenreListBox.Location = new System.Drawing.Point(242, 127);
             this.GenreListBox.Name = "GenreListBox";
             this.GenreListBox.Size = new System.Drawing.Size(176, 84);
             this.GenreListBox.TabIndex = 2;
             this.GenreListBox.SelectedIndexChanged += new System.EventHandler(this.GenreListBox_SelectedIndexChanged);
+            this.GenreListBox.DoubleClick += new System.EventHandler(this.GenreListBox_DoubleClick);
             // 
             // GenreSelecHScroll
             // 

@@ -15,6 +15,7 @@ namespace JukeBox
     {
         string applicationPath = Directory.GetCurrentDirectory() + "\\";    //using this variables means we can use the same directory when creating all files... this variable will not change.
         string[,] genreArray = new String[50, 50];   // Array to contain genre  and their songs [x,y] x = 0 Genre name x = 1,2,3,4... Songs within that genre. y is used to add new genres and their songs.
+        string[] playlist = new String[16];
 
         public JukeBoxForm()
         {
@@ -43,24 +44,31 @@ namespace JukeBox
            
         }
 
+        
+
         private void JukeBoxForm_Load(object sender, EventArgs e)
         {
-            if (!File.Exists(applicationPath + "configuration.txt"))
+
+
+            if (! File.Exists(applicationPath + "configuration.txt"))
             {
                 StreamWriter createfile = File.CreateText(applicationPath + "configuration.txt");   // Creates text file in the current directory; called 'configuration' i it doesnt already exist
                 createfile.Close();
+
+                FileToArray();
             }
 
-            fileToArray();
+           
         }
 
 
 
-        private void fileToArray()
+        private void FileToArray()
         {
             StreamReader readfile = File.OpenText(applicationPath + "configuration.txt"); //open file
 
-            string lineOfText;            lineOfText = readfile.ReadLine(); //decalare to use with while loop
+            string lineOfText;
+            lineOfText = readfile.ReadLine(); //decalare to use with while loop
 
             string numberOfSongs;   //will contain number of songs within a genre -- this was to help format data for read/write
 
@@ -78,7 +86,7 @@ namespace JukeBox
                 while (count <= Convert.ToInt16(numberOfSongs)) //loop to add songs
                 {
                     lineOfText = readfile.ReadLine();
-                    genreArray[count, genrenumber] = lineOfText; // add song name to array
+                    genreArray[count, genrenumber] = lineOfText;
                 }
 
                 lineOfText = readfile.ReadLine();
@@ -87,6 +95,26 @@ namespace JukeBox
 
             readfile.Close();
 
+        }
+
+        private void GenreListBox_DoubleClick(object sender, EventArgs e)
+        {
+            string SelectedSong;    //stores the user's selected song
+            SelectedSong = Convert.ToString(GenreListBox.SelectedItem);
+
+            string checker;     //used to initiate the loop and end the loop --
+            checker = "";
+
+            int count;
+            count = 0;
+
+
+            while (checker != null) //cycle through the playlist and adds the selected song to the end 
+            {
+                checker = playlist[count]; //when null element is found exit loop and then add seleceted song to playlist
+                count = count + 1;
+            }
+            playlist[count - 1] = SelectedSong;
         }
     }
 }
