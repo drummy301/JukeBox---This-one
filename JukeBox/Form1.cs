@@ -18,6 +18,7 @@ namespace JukeBox
         string[] playlist = new String[15]; //playlist of songs max 16 songs
        
         bool currentlyplayingBoolean = false;
+        string currentlyplayingString;
 
 
         public JukeBoxForm()
@@ -25,15 +26,9 @@ namespace JukeBox
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-           
-        }
+      
 
-        private void hScrollBar1_Scroll(object sender, ScrollEventArgs e)
-        {
-
-        }
+        
 
         private void setupToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -42,10 +37,7 @@ namespace JukeBox
 
         }
 
-        private void GenreListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           
-        }
+      
 
         
 
@@ -119,18 +111,54 @@ namespace JukeBox
             }
 
             playlist[count - 1] = SelectedSong; //add selected song to the playlist
+            PlayListBox.Items.Add(SelectedSong);
 
+           Nextsong();
 
-            if (currentlyplayingBoolean == true)
+            
+
+        }
+
+        private void Nextsong()
+        {
+            if(currentlyplayingBoolean == false)
             {
-                PlayListBox.Items.Add(Convert.ToString(GenreListBox.SelectedItem));
+                currentlyplayingString = playlist[0];
+                currentlyplayingBoolean  = true; //sets the boolean to true to inform the system that a song i currently being played
+                PresentlyPlayTxtBox.Text = currentlyplayingString; //Adds the song first on the paylist to currently playing textbox and var
+
+                PlayListBox.Items.RemoveAt(0);
+
+                // Now to remove the first item on the playlist and shift the elements up in the array
+
+                int count = 0;      //used to count
+                string check = "" ; //can be used to terminate loop when theres no more elements to shift up
+
+                while(check != null)    //loop until we come accross a null element in the next cell
+                {
+                    playlist[count] = playlist[count + 1]; //copies the cell beneath
+                    playlist[count + 1] = null; //clears the cell beneath
+
+                    count++;    //increment count
+                    check = playlist[count + 1];    //change checker to next element in the list
+                }
+                
             }
-            else
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+          if (currentlyplayingBoolean == true)  //used for testing 
+            {
+                currentlyplayingBoolean = false;
+                
+            
+            }
+          else
             {
                 currentlyplayingBoolean = true;
-                PresentlyPlayTxtBox.Text = Convert.ToString(GenreListBox.SelectedItem);
             }
-
         }
     }
 }
