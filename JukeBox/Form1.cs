@@ -15,7 +15,10 @@ namespace JukeBox
     {
         string applicationPath = Directory.GetCurrentDirectory() + "\\";    //using this variables means we can use the same directory when creating all files... this variable will not change.
         string[,] genreArray = new String[50, 50];   // Array to contain genre  and their songs [x,y] x = 0 Genre name x = 1,2,3,4... Songs within that genre. y is used to add new genres and their songs.
-        string[] playlist = new String[16];
+        string[] playlist = new String[15]; //playlist of songs max 16 songs
+       
+        bool currentlyplayingBoolean = false;
+
 
         public JukeBoxForm()
         {
@@ -34,7 +37,7 @@ namespace JukeBox
 
         private void setupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SetupForm SetupForm = new SetupForm();
+            SetupForm SetupForm = new SetupForm(); //shows the setup orm
             SetupForm.Show();
 
         }
@@ -80,10 +83,10 @@ namespace JukeBox
                 numberOfSongs = lineOfText; //Used to create loop for reading songs from the file
 
                 lineOfText = readfile.ReadLine();
-                genreArray[0,genrenumber] = lineOfText; //Adds the genre name to the Array
+                genreArray[0,genrenumber] = lineOfText; //Adds the genre name to the genreArray
                 int count = 1;
 
-                while (count <= Convert.ToInt16(numberOfSongs)) //loop to add songs
+                while (count <= Convert.ToInt16(numberOfSongs)) //loop to add songs to the genrearray
                 {
                     lineOfText = readfile.ReadLine();
                     genreArray[count, genrenumber] = lineOfText;
@@ -93,7 +96,7 @@ namespace JukeBox
 
             }
 
-            readfile.Close();
+            readfile.Close(); //need to close file
 
         }
 
@@ -105,7 +108,7 @@ namespace JukeBox
             string checker;     //used to initiate the loop and end the loop --
             checker = "";
 
-            int count;
+            int count;  //counter keep track of position in the playlist
             count = 0;
 
 
@@ -114,7 +117,20 @@ namespace JukeBox
                 checker = playlist[count]; //when null element is found exit loop and then add seleceted song to playlist
                 count = count + 1;
             }
-            playlist[count - 1] = SelectedSong;
+
+            playlist[count - 1] = SelectedSong; //add selected song to the playlist
+
+
+            if (currentlyplayingBoolean == true)
+            {
+                PlayListBox.Items.Add(Convert.ToString(GenreListBox.SelectedItem));
+            }
+            else
+            {
+                currentlyplayingBoolean = true;
+                PresentlyPlayTxtBox.Text = Convert.ToString(GenreListBox.SelectedItem);
+            }
+
         }
     }
 }
