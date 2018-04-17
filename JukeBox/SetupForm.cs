@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using Microsoft.VisualBasic;
+
 
 namespace JukeBox
 {
@@ -17,12 +19,12 @@ namespace JukeBox
 
         public string applicationPath = Directory.GetCurrentDirectory() + "\\";    //using this variables means we can use the same directory when creating all files... this variable will not change.
         public string[,] genreArray = new String[50, 50];   // Array to contain genre  and their songs [x,y] x = 0 Genre name x = 1,2,3,4... Songs within that genre. y is used to add new genres and their songs.
-        public int totalgenrenumber = 0; //total number of genres
+        public int totalgenre = 0; //total number of genres
 
         //VARS///////////////////////////////////////////////////
 
         int genreselected = 0;
-        int totalgenre;
+       
 
         JukeBoxForm JukeBox = new JukeBoxForm(); // required so that public variable from jukeboxform can be used
 
@@ -89,6 +91,23 @@ namespace JukeBox
             }
 
         }
+        public void CountGenres() 
+        {
+            //// count genres total number of genres is required in other methods and required when new genres are added
+
+            totalgenre = -1;  //resets the count so that the genres can be counted again
+
+            string checker = genreArray[0, totalgenre+1];
+            
+
+            while (checker != null)
+            {
+                totalgenre++;
+                checker = genreArray[0, totalgenre];
+            }
+            
+        }
+
         //FORM SHOWN///////////////////////////////////////////////////
 
         private void SetupForm_Shown(object sender, EventArgs e)
@@ -96,21 +115,11 @@ namespace JukeBox
 
             FileToArray();
 
-            totalgenre = 0;
-
-            string checker = "";
-            int count = -1;
-
-            while(checker != null)
-            {
-                count++;
-                checker = genreArray[0, count];
-            }
-            totalgenre = count;
+            CountGenres(); 
 
             //Loads genres and their songs into the the tracklist
             GenresLoad(0);
-            leftGenreSelectorBtn.Enabled = false;
+            
 
         }
       
@@ -131,19 +140,11 @@ namespace JukeBox
 
         private void rightGenreSelectorBtn_Click(object sender, EventArgs e)
         {
-            leftGenreSelectorBtn.Enabled = true;
-            rightGenreSelectorBtn.Enabled = false; // dont let the user use this again until verified that there is another genre to select
-                                                       
             //select genre to the right of this one
-            if (genreselected < totalgenre-1) //checks wether theres a genre to the right
+            if (genreselected <= totalgenre-1) //checks wether theres a genre to the right
             {
                 genreselected++; // inc genre selected to next genre
                 GenresLoad(genreselected); // loads according genre
-
-                if (genreselected != totalgenre)  // this will mean that when you get to the last genre the user can tell because the selector will be shadowed
-                {
-                    rightGenreSelectorBtn.Enabled = true; //enable the button to be clicked again as there is another 
-                }
             }
         }
 
@@ -166,19 +167,13 @@ namespace JukeBox
         private void leftGenreSelectorBtn_Click(object sender, EventArgs e)
         {
             //chose genre to the left
-            rightGenreSelectorBtn.Enabled = true; // resets opposing button
-            leftGenreSelectorBtn.Enabled = false; // dont let the user use this again until verified that there is another genre to select
+            
 
             //select genre to the right of this one
             if (genreselected > 0)
             {
                 genreselected--; // inc genre selected to next genre
                 GenresLoad(genreselected);
-
-                if (genreselected != 0)  // this will mean that when you get to the last genre the user can tell because the selector will be shadowed
-                {
-                    leftGenreSelectorBtn.Enabled = true;
-                }
                 
             }
         }
@@ -186,6 +181,15 @@ namespace JukeBox
         private void addGenreBtn_Click(object sender, EventArgs e)
         {
             //add new genre
+            string newGenre = Interaction.InputBox("Add your new genre here:", "Add Genre", "");
+
+            CountGenres();
+
+            genreArray[0, totalgenre] = newGenre;
+            genreArray[1, totalgenre] = "0";
+            genreselected = totalgenre;
+            GenresLoad(totalgenre);
+
         }
 
         private void copyBtn_Click(object sender, EventArgs e)
