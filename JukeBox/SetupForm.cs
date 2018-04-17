@@ -19,11 +19,12 @@ namespace JukeBox
 
         public string applicationPath = Directory.GetCurrentDirectory() + "\\";    //using this variables means we can use the same directory when creating all files... this variable will not change.
         public string[,] genreArray = new String[50, 50];   // Array to contain genre  and their songs [x,y] x = 0 Genre name x = 1,2,3,4... Songs within that genre. y is used to add new genres and their songs.
+        public int genreselected = 0;
         public int totalgenre = 0; //total number of genres
 
         //VARS///////////////////////////////////////////////////
 
-        int genreselected = 0;
+       
        
 
         JukeBoxForm JukeBox = new JukeBoxForm(); // required so that public variable from jukeboxform can be used
@@ -151,6 +152,35 @@ namespace JukeBox
         private void deleteGenreBtn_Click(object sender, EventArgs e)
         {
             //delete a genre and its songs
+            int genreNum = genreselected;
+
+            string check = genreArray[0, genreNum]; //check = genre title; first element within a genre
+
+            while (check != null) //loop stops when we reach the end o the genres
+            {
+                int numOfSongs = Convert.ToInt16(genreArray[1, genreNum]); // number of songs within this genre
+
+                int Count = 0; //used to count number of songs
+
+                genreArray[0, genreNum] = genreArray[0, genreNum + 1];  //Switches the next genre to the current genre - shifting genres to the left 
+                genreArray[1, genreNum] = genreArray[1, genreNum + 1];
+
+                genreArray[0, genreNum+1] = null;   // Sets the next genre title to null
+                genreArray[1, genreNum+1] = null;  // sets the next genre song count to null
+
+                while (genreArray[Count + 2, genreNum + 1]!= null || genreArray[Count + 2, genreNum] != null)
+                {
+                   genreArray[Count + 2, genreNum] = genreArray[Count + 2, genreNum + 1];
+                    genreArray[Count + 2, genreNum+1] = null;
+                    
+                    Count++;
+                }
+
+                check = genreArray[0, genreNum + 1];
+            }
+
+            int numberOfSongs = Convert.ToInt16(genreArray[1, genreselected]);//number of songs in the genre
+            
         }
 
         private void importListBox_SelectedIndexChanged(object sender, EventArgs e)
