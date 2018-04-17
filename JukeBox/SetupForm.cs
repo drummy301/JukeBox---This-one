@@ -168,18 +168,20 @@ namespace JukeBox
                 genreArray[0, genreNum+1] = null;   // Sets the next genre title to null
                 genreArray[1, genreNum+1] = null;  // sets the next genre song count to null
 
-                while (genreArray[Count + 2, genreNum + 1]!= null || genreArray[Count + 2, genreNum] != null)
+                while (genreArray[Count + 2, genreNum + 1]!= null || genreArray[Count + 2, genreNum] != null) //checks to see if both genres are emptt
                 {
-                   genreArray[Count + 2, genreNum] = genreArray[Count + 2, genreNum + 1];
+                    genreArray[Count + 2, genreNum] = genreArray[Count + 2, genreNum + 1]; // switches the song from next element to current element
                     genreArray[Count + 2, genreNum+1] = null;
                     
                     Count++;
                 }
-
-                check = genreArray[0, genreNum + 1];
+                genreNum++;
+                check = genreArray[0, genreNum + 1]; // checks the next genre -- looking for the end of the genre
             }
 
             int numberOfSongs = Convert.ToInt16(genreArray[1, genreselected]);//number of songs in the genre
+
+            GenresLoad(0); //reloads first genre into listbox
             
         }
 
