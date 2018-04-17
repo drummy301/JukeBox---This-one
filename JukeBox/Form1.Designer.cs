@@ -39,7 +39,6 @@
             this.setupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.WinMedPlayer = new AxWMPLib.AxWindowsMediaPlayer();
-            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WinMedPlayer)).BeginInit();
             this.SuspendLayout();
@@ -55,6 +54,7 @@
             // 
             // GenreTitleTxtBox
             // 
+            this.GenreTitleTxtBox.Enabled = false;
             this.GenreTitleTxtBox.Location = new System.Drawing.Point(242, 99);
             this.GenreTitleTxtBox.Name = "GenreTitleTxtBox";
             this.GenreTitleTxtBox.ReadOnly = true;
@@ -131,16 +131,6 @@
             this.WinMedPlayer.Size = new System.Drawing.Size(10, 10);
             this.WinMedPlayer.TabIndex = 7;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(67, 74);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // JukeBoxForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -148,7 +138,6 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(682, 653);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.PlayListBox);
             this.Controls.Add(this.PresentlyPlayTxtBox);
             this.Controls.Add(this.GenreSelecHScroll);
@@ -183,7 +172,6 @@
         private System.Windows.Forms.ToolStripMenuItem setupToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private AxWMPLib.AxWindowsMediaPlayer WinMedPlayer;
-        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -42,7 +42,7 @@
             this.deleteGenreBtn = new System.Windows.Forms.Button();
             this.okBtn = new System.Windows.Forms.Button();
             this.cancelBtn = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.GenreTitleTxtBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -74,6 +74,7 @@
             this.copyBtn.TabIndex = 2;
             this.copyBtn.Text = "Copy Track > > >";
             this.copyBtn.UseVisualStyleBackColor = true;
+            this.copyBtn.Click += new System.EventHandler(this.copyBtn_Click);
             // 
             // moveBtn
             // 
@@ -83,6 +84,7 @@
             this.moveBtn.TabIndex = 3;
             this.moveBtn.Text = "Move Track > > >";
             this.moveBtn.UseVisualStyleBackColor = true;
+            this.moveBtn.Click += new System.EventHandler(this.moveBtn_Click);
             // 
             // deleteBtn
             // 
@@ -101,6 +103,7 @@
             this.importBtn.TabIndex = 5;
             this.importBtn.Text = "Import Directory";
             this.importBtn.UseVisualStyleBackColor = true;
+            this.importBtn.Click += new System.EventHandler(this.importBtn_Click);
             // 
             // leftGenreSelectorBtn
             // 
@@ -110,6 +113,7 @@
             this.leftGenreSelectorBtn.TabIndex = 6;
             this.leftGenreSelectorBtn.Text = "<";
             this.leftGenreSelectorBtn.UseVisualStyleBackColor = true;
+            this.leftGenreSelectorBtn.Click += new System.EventHandler(this.leftGenreSelectorBtn_Click);
             // 
             // clearImportsBtn
             // 
@@ -119,6 +123,7 @@
             this.clearImportsBtn.TabIndex = 7;
             this.clearImportsBtn.Text = "Clear";
             this.clearImportsBtn.UseVisualStyleBackColor = true;
+            this.clearImportsBtn.Click += new System.EventHandler(this.clearImportsBtn_Click);
             // 
             // rightGenreSelectorBtn
             // 
@@ -138,6 +143,7 @@
             this.addGenreBtn.TabIndex = 9;
             this.addGenreBtn.Text = "Add ";
             this.addGenreBtn.UseVisualStyleBackColor = true;
+            this.addGenreBtn.Click += new System.EventHandler(this.addGenreBtn_Click);
             // 
             // deleteGenreBtn
             // 
@@ -169,17 +175,19 @@
             this.cancelBtn.UseVisualStyleBackColor = true;
             this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
-            // textBox1
+            // GenreTitleTxtBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(328, 58);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(189, 22);
-            this.textBox1.TabIndex = 13;
+            this.GenreTitleTxtBox.Enabled = false;
+            this.GenreTitleTxtBox.Location = new System.Drawing.Point(328, 58);
+            this.GenreTitleTxtBox.Name = "GenreTitleTxtBox";
+            this.GenreTitleTxtBox.ReadOnly = true;
+            this.GenreTitleTxtBox.Size = new System.Drawing.Size(189, 22);
+            this.GenreTitleTxtBox.TabIndex = 13;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.importListBox);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.GenreTitleTxtBox);
             this.groupBox1.Controls.Add(this.trackListBox);
             this.groupBox1.Controls.Add(this.copyBtn);
             this.groupBox1.Controls.Add(this.moveBtn);
@@ -208,7 +216,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SetupForm";
             this.Text = "Setup";
-            this.Load += new System.EventHandler(this.SetupForm_Load);
+            this.Shown += new System.EventHandler(this.SetupForm_Shown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -230,7 +238,7 @@
         private System.Windows.Forms.Button deleteGenreBtn;
         private System.Windows.Forms.Button okBtn;
         private System.Windows.Forms.Button cancelBtn;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox GenreTitleTxtBox;
         private System.Windows.Forms.GroupBox groupBox1;
     }
 }
