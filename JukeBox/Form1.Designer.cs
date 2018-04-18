@@ -121,6 +121,7 @@
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
             this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // WinMedPlayer
             // 
@@ -128,8 +129,10 @@
             this.WinMedPlayer.Location = new System.Drawing.Point(12, 9);
             this.WinMedPlayer.Name = "WinMedPlayer";
             this.WinMedPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("WinMedPlayer.OcxState")));
-            this.WinMedPlayer.Size = new System.Drawing.Size(10, 10);
+            this.WinMedPlayer.Size = new System.Drawing.Size(339, 133);
             this.WinMedPlayer.TabIndex = 7;
+            this.WinMedPlayer.Visible = false;
+            this.WinMedPlayer.Enter += new System.EventHandler(this.WinMedPlayer_Enter);
             // 
             // JukeBoxForm
             // 

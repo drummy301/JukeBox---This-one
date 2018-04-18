@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
+
 namespace JukeBox
 {
     public partial class JukeBoxForm : Form
@@ -92,11 +93,16 @@ namespace JukeBox
 
         private void Nextsong()
         {
+            WMPLib.WindowsMediaPlayer wmp = new WMPLib.WindowsMediaPlayer();
+
             //adds song from playlist to currently playling and creates the new playlist
+
+
 
             if (currentlyplayingBoolean == false)
             {
                 currentlyplayingString = playlist[0];
+                wmp.URL = applicationPath + "/media/" + currentlyplayingString;
                 currentlyplayingBoolean = true; //sets the boolean to true to inform the system that a song i currently being played
                 PresentlyPlayTxtBox.Text = currentlyplayingString; //Adds the song first on the paylist to currently playing textbox and var
 
@@ -125,10 +131,10 @@ namespace JukeBox
         private void JukeBoxForm_Load(object sender, EventArgs e)
         {
 
-            if (! File.Exists(applicationPath + "configuration.txt"))
+            if (!File.Exists(applicationPath + "configuration.txt"))
             {
                 // Creates text file in the current directory; called 'configuration' if it doesnt already exist
-                StreamWriter createfile = File.CreateText(applicationPath + "configuration.txt");  
+                StreamWriter createfile = File.CreateText(applicationPath + "configuration.txt");
                 createfile.Close();
             }
 
@@ -146,7 +152,7 @@ namespace JukeBox
         }
 
         private void GenreListBox_DoubleClick(object sender, EventArgs e)
-        {   
+        {
             // add song selected to the playlist and add to currently playing if a song is not already currently playing 
 
             string SelectedSong;    //stores the user's selected song
@@ -168,14 +174,26 @@ namespace JukeBox
             playlist[count - 1] = SelectedSong; //add selected song to the playlist
             PlayListBox.Items.Add(SelectedSong);
 
-           Nextsong();
+            Nextsong();
         }
 
         private void GenreSelecHScroll_ValueChanged(object sender, EventArgs e)
         {
             //selectinG genres
-            
+
             GenresLoad(GenreSelecHScroll.Value);
+        }
+
+        private void WinMedPlayer_Enter(object sender, EventArgs e)
+        {
+            currentlyplayingBoolean = false;
+            Nextsong();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            about about = new about();
+            about.Show();
         }
     }
 }
