@@ -132,7 +132,7 @@
             this.WinMedPlayer.Size = new System.Drawing.Size(339, 133);
             this.WinMedPlayer.TabIndex = 7;
             this.WinMedPlayer.Visible = false;
-            this.WinMedPlayer.Enter += new System.EventHandler(this.WinMedPlayer_Enter);
+            this.WinMedPlayer.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.WinMedPlayer_PlayStateChange);
             // 
             // JukeBoxForm
             // 

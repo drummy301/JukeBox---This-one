@@ -184,16 +184,17 @@ namespace JukeBox
             GenresLoad(GenreSelecHScroll.Value);
         }
 
-        private void WinMedPlayer_Enter(object sender, EventArgs e)
-        {
-            currentlyplayingBoolean = false;
-            Nextsong();
-        }
-
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             about about = new about();
             about.Show();
         }
+
+        private void WinMedPlayer_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e)
+        {
+            currentlyplayingBoolean = false;
+            Nextsong();
+        
+    }
     }
 }
