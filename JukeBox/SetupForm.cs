@@ -21,6 +21,8 @@ namespace JukeBox
         public string[,] genreArray = new String[50, 50];   // Array to contain genre  and their songs [x,y] x = 0 Genre name x = 1,2,3,4... Songs within that genre. y is used to add new genres and their songs.
         public int genreselected = 0;
         public int totalgenre = 0; //total number of genres
+        public string[] importedTracks = new String[31];
+        
 
         //VARS///////////////////////////////////////////////////
 
@@ -198,10 +200,8 @@ namespace JukeBox
 
         private void leftGenreSelectorBtn_Click(object sender, EventArgs e)
         {
-            //chose genre to the left
-            
-
-            //select genre to the right of this one
+       
+            //select genre to the left of this one
             if (genreselected > 0)
             {
                 genreselected--; // inc genre selected to next genre
@@ -236,8 +236,28 @@ namespace JukeBox
 
         private void importBtn_Click(object sender, EventArgs e)
         {
-            //import tracks from selected directory
+            //IMport tracks from directory into list box where paths can be selected and moved into media file if chosen to
+       
+            importListBox.Items.Clear();
 
+            FolderBrowserDialog importDir = new FolderBrowserDialog();
+
+            if (importDir.ShowDialog() == DialogResult.OK)
+            {
+                importedTracks = Directory.GetFiles(importDir.SelectedPath);
+
+                int count = 0;
+                
+               
+
+                while (count < importedTracks.Length)  // Adds the elements to the list -- the elements contain the file path this can be later removed to look more apealing
+                {
+                    importListBox.Items.Add(importedTracks[count]);
+                    count++;
+                    
+
+                }
+            }
         }
 
         private void clearImportsBtn_Click(object sender, EventArgs e)
