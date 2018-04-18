@@ -22,12 +22,13 @@ namespace JukeBox
         public int genreselected = 0;
         public int totalgenre = 0; //total number of genres
         public string[] importedTracks = new String[31];
-        
+        public string mediaLocation = Directory.GetCurrentDirectory() + "/media/";
+
 
         //VARS///////////////////////////////////////////////////
 
-       
-       
+
+
 
         JukeBoxForm JukeBox = new JukeBoxForm(); // required so that public variable from jukeboxform can be used
 
@@ -227,11 +228,59 @@ namespace JukeBox
         private void copyBtn_Click(object sender, EventArgs e)
         {
             //copy track from directory to media directory and add to genre selected
+
+            string SelectedTrack = Convert.ToString(importListBox.SelectedItem);
+            int count = 1;
+            string check = "";
+
+            while (check != null)
+                {
+                count++;
+                check = genreArray[count, genreselected];
+                
+                }
+
+            string result = Path.GetFileName(SelectedTrack); //converts into just filename
+
+            int value = Convert.ToInt16(genreArray[1, genreselected]);      //adds value to genres song total
+            value++;
+            genreArray[1, genreselected] = Convert.ToString(value);
+
+            genreArray[count, genreselected] = result;  //adds song name to genre
+
+            System.IO.File.Copy(SelectedTrack, mediaLocation+result, true); //copys file into media file
+
+            trackListBox.Items.Add(result);
+
         }
 
         private void moveBtn_Click(object sender, EventArgs e)
         {
             //move track from directory to media directory and add to genre selected
+            //copy track from directory to media directory and add to genre selected
+
+            string SelectedTrack = Convert.ToString(importListBox.SelectedItem);
+            int count = 1;
+            string check = "";
+
+            while (check != null)
+            {
+                count++;
+                check = genreArray[count, genreselected];
+
+            }
+
+            string result = Path.GetFileName(SelectedTrack); //converts into just filename
+
+            int value = Convert.ToInt16(genreArray[1, genreselected]);      //adds value to genres song total
+            value++;
+            genreArray[1, genreselected] = Convert.ToString(value);
+
+            genreArray[count, genreselected] = result;  //adds song name to genre
+
+            System.IO.File.Move(SelectedTrack, mediaLocation + result); //copys file into media file
+
+            trackListBox.Items.Add(result);
         }
 
         private void importBtn_Click(object sender, EventArgs e)
@@ -264,7 +313,5 @@ namespace JukeBox
         {
             //clear directory selection/ the track imported
         }
-
-        
     }
 }
