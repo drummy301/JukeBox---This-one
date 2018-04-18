@@ -134,9 +134,33 @@ namespace JukeBox
         {
             //Need to add data to file and load onto the array
 
+            StreamWriter overwrite = new StreamWriter(applicationPath + "configuration.txt"); // overwrite file with new configurations
+            overwrite.Close();
 
+            StreamWriter stream = new StreamWriter(applicationPath + "configuration.txt", true);
 
-            
+            string check = "";
+            int count = 0;  //measure genre
+
+             while (check != null)
+            {
+                int loops = Convert.ToInt16(genreArray[1, count]);
+
+                stream.WriteLine(genreArray[1, count]); //writes number of songs in genre
+                stream.WriteLine(genreArray[0, count]); //writes title of genre
+                
+                for (int i = 2; i < loops +2 ;) // i measures the song
+                {
+                    stream.WriteLine(genreArray[i, count]); //writes songs
+                    i++;
+                }
+
+                count++;
+                check = genreArray[0, count];
+               
+            }
+            stream.Close();
+
             this.Close();
         }
 

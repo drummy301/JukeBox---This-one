@@ -35,6 +35,7 @@ namespace JukeBox
 
         public void GenresLoad(int genre)
         {
+            FileToArray(); // loads new array
             //adds genres and their songs to the genrelist box
 
             GenreListBox.Items.Clear(); //clears any old songs
@@ -171,8 +172,9 @@ namespace JukeBox
         }
 
         private void GenreSelecHScroll_ValueChanged(object sender, EventArgs e)
-        { 
+        {
             //selectinG genres
+            
             GenresLoad(GenreSelecHScroll.Value);
         }
     }
