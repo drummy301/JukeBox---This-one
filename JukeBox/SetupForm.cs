@@ -133,11 +133,9 @@ namespace JukeBox
         private void okBtn_Click(object sender, EventArgs e)
         {
             //Need to add data to file and load onto the array
-            
 
-            // need to write changes to file
-             
-           
+
+
             
             this.Close();
         }
@@ -312,6 +310,44 @@ namespace JukeBox
         private void clearImportsBtn_Click(object sender, EventArgs e)
         {
             //clear directory selection/ the track imported
+            importListBox.Items.Clear();
+        }
+
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+            //delete track from genre
+            string delSelect = Convert.ToString(trackListBox.SelectedItem);
+
+            int value = Convert.ToInt16(genreArray[1, genreselected]);
+            value--;
+            genreArray[1, genreselected] = Convert.ToString(value);
+
+            int count = 2;
+            string check = "";
+
+            while (check != null) 
+            {
+               check = genreArray[count, genreselected];
+                if (check == delSelect)
+                {
+                    string check2 = "";
+                    int count2 = count;
+                    while (check2 != null)
+                    {
+                        genreArray[count2, genreselected] = genreArray[count2 + 1, genreselected];
+                        genreArray[count2+ 1, genreselected] = null;
+
+                       
+                        count2++;
+                        check2 = genreArray[count2 + 1, genreselected];
+                    }
+
+                }
+                count++;
+                check = genreArray[count + 1, genreselected];
+            }
+            trackListBox.Items.Remove(delSelect);
+
         }
     }
 }
